@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ancient Cross STv</title>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+        .title {
+            font-size: 2em;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        #video-container {
+            width: 80%;
+            height: 450px;
+            margin-top: 20px;
+        }
+        #status {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">The Ancient Cross STv</div>
+    <div id="video-container"></div>
+    <div id="status">Checking live stream status...</div>
+
+    <script>
+        let liveStreamStatus = false;
+
+        function checkLiveStream() {
+            fetch('/api/check-live-stream')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.liveStreamStatus) {
+                        liveStreamStatus = true;
+                        loadLiveStream(data.videoId);
+                    } else {
+                        liveStreamStatus = false;
+                        loadPlaylist();
+                    }
+                });
+        }
+
+        function loadLiveStream(videoId) {
+            document.getElementById('status').innerText = "Live stream is on!";
+            new YT.Player('video-container', {
+                videoId: videoId,
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function loadPlaylist() {
+            document.getElementById('status').innerText = "No live stream, showing playlist.";
+            new YT.Player('video-container', {
+                videoId: 'W3ag7ys5JBxhbEpq',  // First video of the playlist
+                playlist: 'PL358U6AJ8gNHH_ZP-2MHXZHVP0fIcZieG', // Playlist ID
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+        checkLiveStream();  // Check for live stream on page load
+    </script>
+</body>
+</html>
