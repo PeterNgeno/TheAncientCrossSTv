@@ -1,12 +1,22 @@
 {
-  "name": "the-ancient-cross-stv",
+  "name": "youtube-restream-project",
   "version": "1.0.0",
-  "description": "Your project description",
-  "main": "server/server.js",
+  "description": "A project that streams YouTube live videos to Restream.io",
+  "main": "server.js",
   "scripts": {
-    "start": "node server/server.js"
+    "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.18.2"
-  }
+    "axios": "^1.5.0",
+    "child_process": "^1.0.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "googleapis": "^105.0.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "author": "",
+  "license": "ISC"
 }
