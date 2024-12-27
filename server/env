@@ -1,7 +1,0 @@
-# Restream RTMP settings
-RTMP_URL=rtmp://live.restream.io/live
-RTMP_STREAM_KEY=re_7092586_eventa7d854e096884d849eb59c0fd996ea9c
-
-# Optional: Add other environment variables as needed for your application
-NODE_ENV=production
-PORT=3000
